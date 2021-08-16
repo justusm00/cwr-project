@@ -29,24 +29,36 @@ const int dimension = 2; // dimension of the system
 
 int main(){
 
+    // file for saving data
     FILE *reson = fopen("resonance.txt", "w");
+    FILE *differ = fopen("diff.txt", "w");
 
+    // specific values used in calculations
     double alpha = 0.0;
+    // lenght of step
     double delta_t = 0.01;
-    double t_max = 400;
+    // maximal time. This has to be high for the low frequency calculations
+    double t_max = 1000;
 
+
+    // strings for different types of solver
     char eul[] = "Euler";
     char rk2[] = "RK2";
     char rk4[] = "RK4";
 
-    for (double omega = 0.0; omega < 3; omega+=0.01){
+    // filling file. 
+    for (double omega = 0.01; omega < 3; omega+=0.01){
+        // resonance curve. structure: omega, analytical, euler, rk2, rk4
         fprintf(reson, "%f,%f,%f,%f,%f\n", omega, x_max_analytical(omega), x_max_numerical(eul, omega, alpha, delta_t, t_max), x_max_numerical(rk2, omega, alpha, delta_t, t_max), x_max_numerical(rk4, omega, alpha, delta_t, t_max));
+
+        // difference between analytical and numerical curves.
+        fprintf(differ, "%f,%f,%f,%f\n", omega, fabs(x_max_numerical(eul, omega, alpha, delta_t, t_max) -  x_max_analytical(omega)), 
+        fabs(x_max_numerical(rk2, omega, alpha, delta_t, t_max) -  x_max_analytical(omega)), fabs(x_max_numerical(rk4, omega, alpha, delta_t, t_max) -  x_max_analytical(omega)));
     }
 
-
-
-
+    // closing file
     fclose(reson);
+    fclose(differ);
     return 0;
 }
 
@@ -95,7 +107,16 @@ double x_max_analytical(double omega){
 }
 
 
-
+/**
+ * @brief Function that calculates the maximum amplitude by solving the system and checking for local maximum
+ * 
+ * @param s         String with what methode is to be used. Choices are "Euler", "RK2" and "RK4"
+ * @param omega     Frequency of external force
+ * @param alpha     parameter for the non-linear part
+ * @param delta_t   time step
+ * @param t_max     max time
+ * @return double   max amplitude
+ */
 double x_max_numerical(char *s, double omega, double alpha, double delta_t, double t_max){
     //array for parameters
     double param[2] = {alpha, omega};
@@ -113,7 +134,7 @@ double x_max_numerical(char *s, double omega, double alpha, double delta_t, doub
         double *x = (double*)malloc(sizeof(double) * 2);
 
         // initial conditions
-        x[0] = 0;
+        x[0] = 1;
         x[1] = 1;
 
         // time
@@ -134,7 +155,7 @@ double x_max_numerical(char *s, double omega, double alpha, double delta_t, doub
             
             // finding max amplitude. Letting the system run for half the time to stabilize
             if (t0 > t_max / 2){
-                // the comparison structure is: amp1 - amp2 - x[0]
+                // the comparison structure is: amp1 - amp2 - x[0]. Here amp2 has to be larger than x[0], but also larger than amp1, so that it sits on the peak
                 if ((x[0] < amp2) && (amp1 < amp2)) {
                     ampl_max = amp2;
                     break;
@@ -165,7 +186,7 @@ double x_max_numerical(char *s, double omega, double alpha, double delta_t, doub
         double *x = (double*)malloc(sizeof(double) * 2);
 
         // initial conditions
-        x[0] = 0;
+        x[0] = 1;
         x[1] = 1;
 
         // time
@@ -187,7 +208,7 @@ double x_max_numerical(char *s, double omega, double alpha, double delta_t, doub
             // finding max amplitude. Letting the system run for half the time to stabilize
             if (t0 > t_max / 2){
                 // the comparison structure is: amp1 - amp2 - x[0]
-                if ((x[0] < amp2) && (amp1 <= amp2)) {
+                if ((x[0] < amp2) && (amp1 < amp2)) {
                     ampl_max = amp2;
                     break;
                 }
@@ -217,7 +238,7 @@ double x_max_numerical(char *s, double omega, double alpha, double delta_t, doub
         double *x = (double*)malloc(sizeof(double) * 2);
 
         // initial conditions
-        x[0] = 0;
+        x[0] = 1;
         x[1] = 1;
 
         // time
