@@ -63,7 +63,7 @@ plt.yscale("log")
 plt.grid()
 plt.xlabel(r"$\omega$")
 plt.ylabel(r"$|x_{max}^{num} - x_{max}^{ana}|$")
-plt.title(r"Resonance Curve. $\alpha = 0, \beta = 2.0, \gamma = 1.0, \delta = 0.25, \Delta t = 0.01, t_{max} = 1000$")
+plt.title(r"Differences. $\alpha = 0, \beta = 2.0, \gamma = 1.0, \delta = 0.25, \Delta t = 0.01, t_{max} = 1000$")
 plt.savefig("Aufgabe2_2.pdf", dpi=200)
 plt.show()
 
