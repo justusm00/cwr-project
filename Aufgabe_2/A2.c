@@ -134,8 +134,8 @@ double x_max_numerical(char *s, double omega, double alpha, double delta_t, doub
         double *x = (double*)malloc(sizeof(double) * 2);
 
         // initial conditions
-        x[0] = 1;
-        x[1] = 1;
+        x[0] = 2;
+        x[1] = 0;
 
         // time
         double t0 = 0;
@@ -186,8 +186,8 @@ double x_max_numerical(char *s, double omega, double alpha, double delta_t, doub
         double *x = (double*)malloc(sizeof(double) * 2);
 
         // initial conditions
-        x[0] = 1;
-        x[1] = 1;
+        x[0] = 2;
+        x[1] = 0;
 
         // time
         double t0 = 0;
@@ -238,8 +238,8 @@ double x_max_numerical(char *s, double omega, double alpha, double delta_t, doub
         double *x = (double*)malloc(sizeof(double) * 2);
 
         // initial conditions
-        x[0] = 1;
-        x[1] = 1;
+        x[0] = 2;
+        x[1] = 0;
 
         // time
         double t0 = 0;
