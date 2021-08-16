@@ -21,10 +21,10 @@ for row in file:
 
 
 plt.figure(1)
-plt.plot(omega, anal, "r", label="analytical")
-plt.plot(omega, eul, "g", label="euler")
-plt.plot(omega, rk2, "b", label="rk2")
-plt.plot(omega, rk4, "c", label="rk4")
+plt.plot(omega, anal, "r", label="Analytical")
+plt.plot(omega, eul, "g", label="Euler")
+plt.plot(omega, rk2, "b", label="RK2")
+plt.plot(omega, rk4, "c", label="RK4")
 plt.legend()
 plt.grid()
 plt.xlabel(r"$\omega$")
@@ -55,9 +55,9 @@ for row in file:
 
 
 plt.figure(2)
-plt.plot(omega, eul, "g", label="euler")
-plt.plot(omega, rk2, "b", label="rk2")
-plt.plot(omega, rk4, "c", label="rk4")
+plt.plot(omega, eul, "g", label="Euler")
+plt.plot(omega, rk2, "b", label="RK2")
+plt.plot(omega, rk4, "c", label="RK4")
 plt.legend()
 plt.yscale("log")
 plt.grid()
