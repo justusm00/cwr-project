@@ -21,7 +21,7 @@ for row in file:
 
 
 plt.figure(1)
-plt.plot(omega, anal, "r", label="Analytical")
+plt.plot(omega, anal, "r", label="Analytic")
 plt.plot(omega, eul, "g", label="Euler")
 plt.plot(omega, rk2, "b", label="RK2")
 plt.plot(omega, rk4, "c", label="RK4")
