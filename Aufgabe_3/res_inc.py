@@ -14,7 +14,7 @@ xe = np.loadtxt("res_euler_inc.dat", usecols = 1) ##euler
 
 plt.figure(dpi=400)
 plt.grid()
-plt.xlabel("driving frequency $\omega$ in Hz")
+plt.xlabel("driving frequency $\omega$")
 plt.ylabel("Amplitude $A/\gamma$")
 plt.title("resonance curve for increasing $\omega$")
 plt.plot(omega,xe, lw = 0.5,label = "Euler")

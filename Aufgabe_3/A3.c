@@ -39,8 +39,8 @@ static const char rk4_res_dec[] = "res_rk4_dec.dat";
 
 //declaration of functions
 int duffing_ode(double t, const double y[], double f[], void *params);
-void ode_step(double t, double y[], int n);
-double res(double y[], int n);
+void ode_step(double t, double y[], int alg);
+double res(double y[], int alg);
 
 
 
@@ -162,12 +162,12 @@ int duffing_ode(double t, const double y[], double f[], void *params)
 
 
 /* function to do integrations steps
-   n determines which algorithm is used: 0 -> Euler, 1 -> RK2, 2 -> RK4
+   alg determines which algorithm is used: 0 -> Euler, 1 -> RK2, 2 -> RK4
 */
 
-void ode_step(double t, double y[], int n)
+void ode_step(double t, double y[], int alg)
 {
-	switch(n)
+	switch(alg)
 	{
 		case 0: euler_step(t, delta_t, y, duffing_ode, dimension, NULL); break;
 		case 1: rk2_step(t, delta_t, y, duffing_ode, dimension, NULL); break;
@@ -182,7 +182,7 @@ void ode_step(double t, double y[], int n)
 
 //function to return amplitude
 
-double res(double y[], int n)
+double res(double y[], int alg)
 {
 	
 	double t0 = 0.0;
@@ -196,7 +196,7 @@ double res(double y[], int n)
 
 
 		// doing a step with the current algorithm
-		ode_step(t0,y,n);
+		ode_step(t0,y,alg);
 
             
             
