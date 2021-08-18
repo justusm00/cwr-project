@@ -38,7 +38,7 @@ static const char rk4_res_dec[] = "res_rk4_dec.dat";
 
 
 //declaration of functions
-int duffing_ode(double t, const double y[], double f[], void *params);
+int duff_ode(double t, const double y[], double f[], void *params);
 void ode_step(double t, double y[], int alg);
 double res(double y[], int alg);
 
@@ -154,7 +154,7 @@ int main()
 int duffing_ode(double t, const double y[], double f[], void *params)
 {
 	f[0] = y[1];
-	f[1] = gamma_ * cos(omega * t) - delta * y[1] - beta * y[0] - alpha * y[0] * y[0] * y[0];
+	f[1] = gamma_ * cos(omega * t + phi) - delta * y[1] - beta * y[0] - alpha * y[0] * y[0] * y[0];
 	return 0;
 }
 
