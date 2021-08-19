@@ -1,7 +1,7 @@
 #include<math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <our_numerics.h>
+#include "../our_numerics.h"
 #include<tgmath.h>
 #define PI 3.14159265358979323846
 
