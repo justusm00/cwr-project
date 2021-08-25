@@ -9,15 +9,17 @@
 #define PI 3.14159265358979323846
 
 
+//########################### EULER_STEP ############################
+
 
 
 void euler_step(double t, double delta_t, double y[], ode_func func, int dimension, void* params)
 {
-	double *f = malloc((int)(sizeof(double) * dimension));
-	func(t,y,f,params);
+	double *f = malloc((int)(sizeof(double) * dimension)); //allocate memory for f
+	func(t,y,f,params); //fill f
 	for(int i = 0; i < dimension; i++)
 	{
-		y[i] += delta_t * (*(f + i));
+		y[i] += delta_t * (*(f + i)); //update y
 	}
 	free(f);
 	
@@ -27,10 +29,15 @@ void euler_step(double t, double delta_t, double y[], ode_func func, int dimensi
 
 
 
+
+//########################### RK2_STEP ############################
+
+
+
 void rk2_step(double t, double delta_t, double y[], ode_func func, int dimension, void* params)
 {
 	
-	double *support = malloc((int)(sizeof(double) * dimension));
+	double *support = malloc((int)(sizeof(double) * dimension)); //support array needed to calculate k's
 	double *k1 = malloc((int)(sizeof(double) * dimension));
 	double *k2 = malloc((int)(sizeof(double) * dimension));
 	func(t,y,k1,params);   //calculate k1
@@ -49,8 +56,10 @@ void rk2_step(double t, double delta_t, double y[], ode_func func, int dimension
 	}
 	for(int i = 0; i < dimension; i++)
 	{
-		y[i] += k2[i]; 
+		y[i] += k2[i]; //update y
 	}
+	
+	//free arrays
 	free(support);
 	free(k1);
 	free(k2);
@@ -63,17 +72,23 @@ void rk2_step(double t, double delta_t, double y[], ode_func func, int dimension
 
 
 
+//########################### RK4_STEP ############################
+
+
+
 
 void rk4_step(double t, double delta_t, double y[], ode_func func, int dimension, void* params)
 {
-	double a1 = 0.5;   //parameters
+	//parameters
+	double a1 = 0.5;   
 	double a2 = 0.5;
 	double a3 = 1.0;
 	double w1 = 1.0/6.0;
 	double w2 = 1.0/3.0;
 	double w3 = 1.0/3.0;
 	double w4 = 1.0/6.0;
-	double *support = malloc((int)(sizeof(double) * dimension));
+	
+	double *support = malloc((int)(sizeof(double) * dimension)); //support arry needed to calculate k's
 	double *k1 = malloc((int)(sizeof(double) * dimension));
 	double *k2 = malloc((int)(sizeof(double) * dimension));
 	double *k3 = malloc((int)(sizeof(double) * dimension));
@@ -134,8 +149,10 @@ void rk4_step(double t, double delta_t, double y[], ode_func func, int dimension
 	
 	for(int i = 0; i < dimension; i++)
 	{
-		y[i] = y[i] +  w1 * k1[i] +  w2 * k2[i] + w3 * k3[i] + w4 * k4[i]; //calculate new y
+		y[i] = y[i] +  w1 * k1[i] +  w2 * k2[i] + w3 * k3[i] + w4 * k4[i]; //update y
 	}
+	
+	//free arrays
 	free(support);
 	free(k1);
 	free(k2);
