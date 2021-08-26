@@ -88,7 +88,7 @@ void rk4_step(double t, double delta_t, double y[], ode_func func, int dimension
 	double w3 = 1.0/3.0;
 	double w4 = 1.0/6.0;
 	
-	double *support = malloc((int)(sizeof(double) * dimension)); //support arry needed to calculate k's
+	double *support = malloc((int)(sizeof(double) * dimension)); //support array needed to calculate k's
 	double *k1 = malloc((int)(sizeof(double) * dimension));
 	double *k2 = malloc((int)(sizeof(double) * dimension));
 	double *k3 = malloc((int)(sizeof(double) * dimension));
