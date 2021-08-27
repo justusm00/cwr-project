@@ -2,9 +2,8 @@
 #include<stdlib.h>
 #include "our_numerics.h"
 #include<stdio.h>
-#include<time.h>
-#include<gsl/gsl_rng.h>
-#include <gsl/gsl_histogram.h>
+
+
 
 #define PI 3.14159265358979323846
 
